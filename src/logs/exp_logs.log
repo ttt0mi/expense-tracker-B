@@ -1,0 +1,11 @@
+[DEBUG|logging_config|L16] 2025-09-19T14:01:51+0100: Logging configured - debug
+[INFO|logging_config|L17] 2025-09-19T14:01:51+0100: Logging configured - info
+[WARNING|logging_config|L18] 2025-09-19T14:01:51+0100: Logging configured - warning
+[ERROR|logging_config|L19] 2025-09-19T14:01:51+0100: Logging configured - error
+[CRITICAL|logging_config|L20] 2025-09-19T14:01:51+0100: Logging configured - critical
+[ERROR|logging_config|L24] 2025-09-19T14:01:51+0100: error
+Traceback (most recent call last):
+  File "/Users/tomiomolokun/PycharmProjects/exp/src/configurations/logging_config.py", line 22, in configure_exp_logger
+    1/0
+    ~^~
+ZeroDivisionError: division by zero
