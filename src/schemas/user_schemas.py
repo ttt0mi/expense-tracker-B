@@ -10,14 +10,16 @@ getcontext().prec = 2
 
 
 class CreateUser(BaseModel):
+	"""a schema defined by pydantic's BaseMode for easy data validation"""
 	first_name: str
 	last_name: str
-	email: EmailStr
+	email: EmailStr	#pydnatic datatype for automatic email str validation
 	password: str
 	wallet_balance: Decimal = 0
 
 	@model_validator(mode='after')
 	def raise_custom_messages(self) -> Self:
+		"""a validator method that raises custom messages for any validation error in the model"""
 		if UserPatterns.name_pattern.fullmatch(self.first_name) is None:
 			raise PydanticCustomError("ValueError",
 									  "invalid first name '{name}'", {"name": self.first_name}
@@ -39,11 +41,13 @@ class CreateUser(BaseModel):
 
 
 class LoginRequest(BaseModel):
-	email: EmailStr
+	"""a schema defined by pydantic's BaseMode for easy data validation"""
+	email: EmailStr		#pydnatic datatype for automatic email str validation
 	password: str
 
 
 class UpdateUser(BaseModel):
+	"""a schema defined by pydantic's BaseMode for easy data validation"""
 	id: str
 	first_name: Optional[str] = Field(default=None, pattern=UserPatterns.name_pattern)
 	last_name: Optional[str] = Field(default=None, pattern=UserPatterns.name_pattern)

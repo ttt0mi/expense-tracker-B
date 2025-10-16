@@ -1,12 +1,14 @@
 from datetime import timedelta
 from functools import lru_cache
-from pathlib import Path
 
+from dotenv import find_dotenv
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-env_path = f"{Path.home()}/PycharmProjects/exp/.env"
+
+env_path = find_dotenv()
 
 class Settings(BaseSettings):
+	"""pydantic settings used to load environmental variables from env file. not required, use os.getenv() as easier alternative"""
 	model_config = SettingsConfigDict(
 			env_file=env_path, env_file_encoding="utf-8", extra="ignore", env_ignore_empty=True
 	)

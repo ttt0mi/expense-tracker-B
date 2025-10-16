@@ -1,12 +1,12 @@
 from werkzeug.exceptions import NotFound, Unauthorized, BadRequest
 
-from database.users_interface import UsersInterface
+from database.users import Users
 from schemas.user_schemas import CreateUser, UpdateUser, LoginRequest
 from utilities.password_tools import hash_password, verify_password
 
 
 class UserHandler:
-	def __init__(self, users: UsersInterface):
+	def __init__(self, users: Users):
 		self.users = users
 
 	def register_user(self, user: CreateUser) -> dict:

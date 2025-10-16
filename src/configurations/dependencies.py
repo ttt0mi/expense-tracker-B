@@ -6,7 +6,7 @@ from database.users import Users
 from handlers.expense_handler import ExpenseHandler
 from handlers.users_handler import UserHandler
 
-
+"""a module that contains functions used for dependency injections in routes, not required."""
 def get_users(database: Database = None) -> Users:
 	if database is None:
 		return Users(db=get_db())

@@ -12,6 +12,7 @@ db: Database = None
 
 
 def connect_to_mongo():
+	"""a function to connect to mongo db"""
 	global client, db
 	client = MongoClient(get_settings().DATABASE_URI)
 	print("Connected to Mongo Client")
@@ -20,6 +21,7 @@ def connect_to_mongo():
 
 
 def get_db():
+	"""a function that provides the database instance"""
 	if db is None:
 		raise RuntimeError("Database connection failed")
 	return db
@@ -27,6 +29,7 @@ def get_db():
 
 @lru_cache
 def get_decimal_codec():
+	"""a function that allows mongodb properly  serialise decimal.Decimal instances. not required"""
 	type_registry = TypeRegistry([DecimalEncoder(), DecimalDecoder()])
 	codec_options = CodecOptions(type_registry=type_registry)
 	return codec_options

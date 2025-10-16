@@ -1,12 +1,12 @@
 from werkzeug.exceptions import NotFound, BadRequest
 
-from database.expenses_interface import ExpensesInterface
-from database.users_interface import UsersInterface
+from database.expenses import Expenses
+from database.users import Users
 from schemas.expense_schemas import CreateExpense, DeleteExpense
 
 
 class ExpenseHandler:
-	def __init__(self, expenses: ExpensesInterface, users: UsersInterface):
+	def __init__(self, expenses: Expenses, users: Users):
 		self.expenses = expenses
 		self.users = users
 

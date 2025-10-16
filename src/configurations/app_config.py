@@ -15,6 +15,8 @@ logger = get_exp_logger()
 
 
 def add_configuration(app: Flask):
+	"""jwt keys for the flask-jwt-extended configuration to work.
+	you do not need all of them, just the first two"""
 	app.config["JWT_SECRET_KEY"] = get_settings().JWT_KEY
 	app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(
 			minutes=get_settings().JWT_ACCESS_TOKEN_EXPIRES)
@@ -27,16 +29,19 @@ def add_configuration(app: Flask):
 
 
 def add_extensions(app: Flask):
+	"""to initialise the flask application with flask-cors and flask-jwt-extended instantiated in another module."""
 	cors.init_app(app)
 	jwt.init_app(app)
 
 
 def add_blueprints(app: Flask):
+	"""to register blueprints to the flask application"""
 	app.register_blueprint(user_bp)
 	app.register_blueprint(expense_bp)
 
 
 def add_exception_handlers(app: Flask):
+	"""register exception handlers used to the flask application"""
 	@app.errorhandler(BadRequest)
 	def handle_bad_request(error: BadRequest):
 		logger.error(str(error))
@@ -71,6 +76,7 @@ def add_exception_handlers(app: Flask):
 
 
 def create_app(app_name):
+	"""app creation factory to avoid filling up the main with unnecessary configurations"""
 	connect_to_mongo()
 	app = Flask(app_name)
 	add_configuration(app)
