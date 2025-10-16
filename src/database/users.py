@@ -9,11 +9,13 @@ from pymongo.synchronous.database import Database
 from werkzeug.exceptions import ServiceUnavailable
 
 from configurations.database_config import get_decimal_codec
-from database.users_interface import UsersInterface
 from schemas.user_schemas import UpdateUser, CreateUser
 
 
-class Users(UsersInterface):
+class Users:
+	"""a class that interacts with the expenses collection in the mongodb database.
+	when methods in this class retrieve documents, they transform the id of type str to ObjectId because it is the id type in the collection,
+	upon retrieval, they then transform the '_id' of type ObjectId back to str and then discard it."""
 	def __init__(self, db: Database):
 		self.db = db
 		self.users = self.db.get_collection("users", codec_options=get_decimal_codec())
